@@ -13,6 +13,12 @@ TEST(StringutilsTest, TestRemoveSpaces) {
 }
 
 TEST(StringutilsTest, TestRemoveSpaces2) {
+    std::string test = "  AB  CD      EF";
+    auto result = stringutils::removeextraspaces(test);
+    ASSERT_STREQ(result.c_str(), "AB CD EF");
+}
+
+TEST(StringutilsTest, TestRemoveSpaces3) {
     std::string test = "AB  CD      EF   ";
     auto result = stringutils::removeextraspaces(test);
     ASSERT_STREQ(result.c_str(), "AB CD EF");
