@@ -45,3 +45,7 @@ std::vector<std::string> mystring::tokenize() {
     }
     return ret;
 }
+
+mystring::mystring() : std::string() {
+
+}
