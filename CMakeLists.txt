@@ -3,7 +3,7 @@ project(myshell)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(myshell main.cpp stringutils.cpp stringutils.h)
+add_executable(myshell main.cpp mystring.cpp mystring.h)
 
 enable_testing()
 add_subdirectory(myshelltests)

@@ -2,13 +2,13 @@
 #include <string>
 #include <vector>
 
-#include "stringutils.h"
+#include "mystring.h"
 
 
 int main() {
     std::cout << "Welcome to my shell" << std::endl;
 
-    std::string strCmd;
+    mystring strCmd;
     std::vector<std::string> cmd;
 
     while (strCmd != "byebye")
@@ -16,9 +16,9 @@ int main() {
         std::cout << "# ";
         std::getline(std::cin, strCmd);
         std::cout << strCmd << std::endl;
-        strCmd = stringutils::removeextraspaces(strCmd);
+        strCmd.removeextraspaces();
         std::cout << strCmd << std::endl;
-        cmd = stringutils::tokenizestring(strCmd);
+        cmd = strCmd.tokenize();
         for(auto & str: cmd) std::cout << str << std::endl;
     }
     return 0;

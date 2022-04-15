@@ -22,11 +22,11 @@ CPMAddPackage(
 )
 
 set(Headers
-    ../stringutils.h
+        ../mystring.h
 )
 
 set(Sources
-    ../stringutils.cpp
+        ../mystring.cpp
         stringtests.cpp
 )
 

@@ -1,20 +1,18 @@
 //
-// Created by Dan on 4/12/2022.
-//
+// Created by harldanp on 4/15/2022.
 
-#include <vector>
+
 #include <sstream>
-#include "stringutils.h"
+#include "mystring.h"
 
-
-std::string stringutils::removeextraspaces(std::string &str) {
+void mystring::removeextraspaces() {
     std::string ret;
 
     //strip any leading spaces
-    auto it = str.begin();
+    auto it = begin();
     while(std::isspace(*it)) it++;
 
-    for(; it < str.end(); )
+    for(; it < end(); )
     {
         ret.push_back(*it);
         if(std::isspace(*it++))
@@ -23,19 +21,21 @@ std::string stringutils::removeextraspaces(std::string &str) {
             while(std::isspace(*it))
             {
                 it++;
-                if(it == str.end())
+                if(it == end())
                 {
                     ret.pop_back();
-                    return ret;
+                    return swap(ret);
                 }
             }
         }
     }
-    return ret;
+    return swap(ret);
 }
 
-std::vector<std::string> stringutils::tokenizestring(std::string &str) {
-    std::istringstream line(str);
+mystring::mystring(const char *string) : std::string(string) {}
+
+std::vector<std::string> mystring::tokenize() {
+    std::istringstream line(*this);
     std::vector<std::string> ret;
     std::string temp;
     while(std::getline(line, temp, ' '))
