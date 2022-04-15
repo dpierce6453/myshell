@@ -11,7 +11,7 @@
 class mystring : public std::string {
 public:
     mystring(const char *string);
-    mystring();
+    mystring() = default;
 
     void removeextraspaces(void);
     std::vector<std::string> tokenize();
