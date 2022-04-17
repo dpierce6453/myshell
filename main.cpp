@@ -15,10 +15,9 @@ int main() {
     {
         std::cout << "# ";
         std::getline(std::cin, strCmd);
-        std::cout << strCmd << std::endl;
-        strCmd.removeextraspaces();
-        std::cout << strCmd << std::endl;
-        cmd = strCmd.tokenize();
+        cmd = strCmd.removeextraspaces().tokenize();
+        //store the cmd in the history buffer
+
         for(auto & str: cmd) std::cout << str << std::endl;
     }
     return 0;

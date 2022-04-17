@@ -3,7 +3,7 @@ project(myshell)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(myshell main.cpp mystring.cpp mystring.h)
+add_executable(myshell main.cpp mystring.cpp mystring.h historybuffer.cpp historybuffer.h)
 
 enable_testing()
 add_subdirectory(myshelltests)

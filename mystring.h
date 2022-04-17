@@ -13,7 +13,7 @@ public:
     mystring(const char *string);
     mystring() = default;
 
-    void removeextraspaces(void);
+    mystring& removeextraspaces(void);
     std::vector<std::string> tokenize();
 
 };

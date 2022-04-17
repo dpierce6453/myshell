@@ -5,7 +5,7 @@
 #include <sstream>
 #include "mystring.h"
 
-void mystring::removeextraspaces() {
+mystring &mystring::removeextraspaces() {
     std::string ret;
 
     //strip any leading spaces
@@ -24,12 +24,14 @@ void mystring::removeextraspaces() {
                 if(it == end())
                 {
                     ret.pop_back();
-                    return swap(ret);
+                    swap(ret);
+                    return *this;
                 }
             }
         }
     }
-    return swap(ret);
+    swap(ret);
+    return *this;
 }
 
 mystring::mystring(const char *string) : std::string(string) {}
