@@ -3,6 +3,7 @@
 
 
 #include <sstream>
+#include <cctype>
 #include "mystring.h"
 
 mystring &mystring::removeextraspaces() {

@@ -4,21 +4,14 @@
 
 #include "historybuffer.h"
 
-void historybuffer::savecmd(std::vector<std::string> v) {
-    buffer.push_back(v);
-}
-
-size_t historybuffer::length() {
-    return buffer.size();
-}
 
 std::vector<std::string>& historybuffer::untokenize() {
     cmds.clear();
-    for(auto v : buffer)
+    for(auto const &v : buffer)
     {
         std::string str;
         str.clear();
-        for(auto innner : v)
+        for(auto const &innner : v)
         {
              str += innner;
              str += ' ';
@@ -29,3 +22,5 @@ std::vector<std::string>& historybuffer::untokenize() {
 
     return cmds;
 }
+
+historybuffer::~historybuffer() = default;

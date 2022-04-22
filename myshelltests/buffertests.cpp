@@ -9,25 +9,26 @@
 
 TEST(buffertests, savecmd)
 {
-    historybuffer buf;
-
+    auto hvec = historybuffer::instance().get();
+    hvec.clear();
     mystring test = "start program parm1 parm2";
     auto cmd = test.removeextraspaces().tokenize();
-    ASSERT_TRUE(buf.get().size() == 0);
-    buf.get().push_back(cmd);
-    ASSERT_TRUE(buf.get().size() == 1);
+    ASSERT_TRUE(hvec.empty());
+    hvec.push_back(cmd);
+    ASSERT_TRUE(hvec.size() == 1);
 }
 
 TEST(buffertests, untokenize)
 {
-    historybuffer buf;
+    historybuffer& hbuf = historybuffer::instance();
+    hbuf.get().clear();
     std::vector<mystring> strvec;
-    strvec.push_back("start program parm1 parm2");
-    strvec.push_back("start chromium-browser");
-    buf.get().push_back(strvec[0].removeextraspaces().tokenize());
-    buf.get().push_back(strvec[1].removeextraspaces().tokenize());
-    std::vector<std::string> cmdhistory = buf.untokenize();
-    for(auto v : cmdhistory)
+    strvec.emplace_back("start program parm1 parm2");
+    strvec.emplace_back("start chromium-browser");
+    hbuf.get().push_back(strvec[0].removeextraspaces().tokenize());
+    hbuf.get().push_back(strvec[1].removeextraspaces().tokenize());
+    std::vector<std::string> cmdhistory = hbuf.untokenize();
+    for(auto const &v : cmdhistory)
     {
         ASSERT_STREQ(v.c_str(), strvec.front().c_str());
         strvec.erase(strvec.begin());

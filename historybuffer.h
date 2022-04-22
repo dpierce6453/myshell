@@ -13,8 +13,10 @@ class historybuffer {
 
 public:
     using historyvector = std::vector<std::vector<std::string>>;
-    void savecmd(std::vector<std::string> v);
-    size_t length();
+    static historybuffer& instance() {
+        static historybuffer inst;
+        return inst;
+    }
     historyvector &get() {return buffer;};
     std::vector<std::string>& untokenize();
 
@@ -22,6 +24,11 @@ public:
 private:
     historyvector buffer;
     std::vector<std::string> cmds;   //untokenized commands
+
+    historybuffer() = default;
+    historybuffer(const historybuffer&) = delete;
+    historybuffer& operator=(const historybuffer&) = delete;
+    ~historybuffer();
 
 };
 
