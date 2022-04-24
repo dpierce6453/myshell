@@ -10,10 +10,9 @@ std::vector<std::string>& historybuffer::untokenize() {
     for(auto const &v : buffer)
     {
         std::string str;
-        str.clear();
-        for(auto const &innner : v)
+        for(auto const &insidevec : v)
         {
-             str += innner;
+             str += insidevec;
              str += ' ';
         }
         str.pop_back();
@@ -23,4 +22,3 @@ std::vector<std::string>& historybuffer::untokenize() {
     return cmds;
 }
 
-historybuffer::~historybuffer() = default;

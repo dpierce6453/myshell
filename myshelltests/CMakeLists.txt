@@ -24,13 +24,17 @@ CPMAddPackage(
 set(Headers
         ../mystring.h
         ../historybuffer.h
+        ../cmdprocessor.h
+        ../historyprocessor.h
 )
 
 set(Sources
         ../mystring.cpp
         ../historybuffer.cpp
+        ../cmdprocessor.cpp
+        ../historyprocessor.cpp
         stringtests.cpp
-        buffertests.cpp)
+        buffertests.cpp processortests.cpp)
 
 add_executable(${This} ${Sources} ${Headers} )
 

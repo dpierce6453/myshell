@@ -19,17 +19,14 @@ public:
     }
     historyvector &get() {return buffer;};
     std::vector<std::string>& untokenize();
-
-
 private:
     historyvector buffer;
     std::vector<std::string> cmds;   //untokenized commands
-
+    // constructor and destructor private.  copying not allowed.
     historybuffer() = default;
+    ~historybuffer() = default;
     historybuffer(const historybuffer&) = delete;
     historybuffer& operator=(const historybuffer&) = delete;
-    ~historybuffer();
-
 };
 
 
