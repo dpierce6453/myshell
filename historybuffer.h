@@ -19,6 +19,7 @@ public:
     }
     historyvector &get() {return buffer;};
     std::vector<std::string>& untokenize();
+    void clear();
 private:
     historyvector buffer;
     std::vector<std::string> cmds;   //untokenized commands

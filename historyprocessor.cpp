@@ -17,6 +17,7 @@ void historyprocessor::docommand() {
                 os << cmdnum++ << ": " << str << std::endl;
             break;
         case CLEAR:
+            hbuf.clear();
             break;
     }
 }

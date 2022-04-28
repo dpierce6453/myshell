@@ -22,3 +22,8 @@ std::vector<std::string>& historybuffer::untokenize() {
     return cmds;
 }
 
+void historybuffer::clear() {
+    historyvector vec;
+    buffer.swap(vec);
+}
+
