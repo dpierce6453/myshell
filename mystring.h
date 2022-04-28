@@ -15,7 +15,8 @@ public:
 
     mystring& removeextraspaces(void);
     std::vector<std::string> tokenize();
-
+private:
+    iterator &skipSpaces(iterator &it);
 };
 
 

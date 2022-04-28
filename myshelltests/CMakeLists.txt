@@ -26,7 +26,7 @@ set(Headers
         ../historybuffer.h
         ../cmdprocessor.h
         ../historyprocessor.h
-)
+        )
 
 set(Sources
         ../mystring.cpp

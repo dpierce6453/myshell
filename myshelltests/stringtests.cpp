@@ -4,15 +4,22 @@
 
 #include "gtest/gtest.h"
 
-#include "../mystring.h"
+#include "mystring.h"
 
-TEST(StringutilsTest, TestRemoveSpaces4) {
+TEST(StringutilsTest, TestRemoveSpaces) {
     mystring test = "AB  CD      EF";
     test.removeextraspaces();
     ASSERT_STREQ(test.c_str(), "AB CD EF");
 }
 
-TEST(StringUtilsTest, TestCopyandMove)
+TEST(StringutilsTest, TestRemoveSpaces_allspaces)
+{
+    mystring test = "        ";
+    test.removeextraspaces();
+    ASSERT_TRUE(test.empty());
+}
+
+TEST(StringutilsTest, TestCopyandMove)
 {
     //just making sure all of this compiles for my derived string class.
     mystring test1 = "Dan is AWESOME!";
@@ -25,14 +32,19 @@ TEST(StringUtilsTest, TestCopyandMove)
     ASSERT_STRNE(test4.c_str(), test3.c_str());
 }
 
-TEST(StringutilsTest, TestRemoveSpaces2) {
+TEST(StringutilsTest, TestRemoveSpaces_with_leading_spaces) {
     mystring test = "  AB  CD      EF";
     test.removeextraspaces();
     ASSERT_STREQ(test.c_str(), "AB CD EF");
 }
 
-TEST(StringutilsTest, TestRemoveSpaces3) {
+TEST(StringutilsTest, TestRemoveSpaces_with_trailing_spaces) {
     mystring test = "AB  CD      EF   ";
+    test.removeextraspaces();
+    ASSERT_STREQ(test.c_str(), "AB CD EF");
+}
+TEST(StringutilsTest, TestRemoveSpaces_with_one_trailing_space) {
+    mystring test = "AB  CD      EF ";
     test.removeextraspaces();
     ASSERT_STREQ(test.c_str(), "AB CD EF");
 }
@@ -44,3 +56,4 @@ TEST(StringUtilsTest, TestTokenize) {
     ASSERT_STREQ(ret[2].c_str(),"-v2");
     ASSERT_STREQ(ret[3].c_str(),"--dowhatever");
 }
+

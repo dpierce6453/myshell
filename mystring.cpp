@@ -8,31 +8,35 @@
 
 mystring &mystring::removeextraspaces() {
     std::string ret;
-
-    //strip any leading spaces
     auto it = begin();
-    while(std::isspace(*it)) it++;
 
-    for(; it < end(); )
+    //skip any leading spaces
+    it = skipSpaces(it);
+
+    while(it < end())
     {
         ret.push_back(*it);
         if(std::isspace(*it++))
         {
-            //found a space.  see if the next char is a space.  If so remember it
-            while(std::isspace(*it))
+            //found a space.  skip the next spaces.
+            it = skipSpaces(it);
+            if(it == end())
             {
-                it++;
-                if(it == end())
-                {
-                    ret.pop_back();
-                    swap(ret);
-                    return *this;
-                }
+                ret.pop_back();  // last char pushed was a trailing space - pop it off.
+                break;
             }
         }
     }
-    swap(ret);
+    swap(ret);  //exchange *this with local string.
     return *this;
+}
+
+std::string::iterator & mystring::skipSpaces(std::string::iterator &it) {
+    while(it != end() && isspace(*it))
+    {
+        it++;
+    }
+    return it;
 }
 
 mystring::mystring(const char *string) : std::string(string) {}

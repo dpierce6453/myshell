@@ -9,21 +9,21 @@
 #include "mystring.h"
 #include "mystring.h"
 
-TEST(processortests, historyprocessor1)
+TEST(processortests, historyprocessor_checkparms_with_clear_parm)
 {
     std::vector<std::string> testcmd = {"history", "-c"};
     auto hp = historyprocessor(testcmd);
     ASSERT_TRUE(hp.checkparms());
 }
 
-TEST(processortests, historyprocessor2)
+TEST(processortests, historyprocessor_checkparms_with_no_parms)
 {
     std::vector<std::string> testcmd = {"history"};
     auto hp = historyprocessor(testcmd);
     ASSERT_TRUE(hp.checkparms());
 }
 
-TEST(processortests, historyprocessor3)
+TEST(processortests, historyprocessor_checkparms_with_bad_parm)
 {
     std::vector<std::string> testcmd = {"history", "goobledy"};
     auto hp = historyprocessor(testcmd);
@@ -40,7 +40,7 @@ static std::vector<mystring> historybufferstrings =
          "replay 3",
          "terminate 1234"};
 
-TEST(processortests, historyprocessor4)
+TEST(processortests, historyprocessor_process_print_history_cmd)
 {
     historybuffer& hbuf = historybuffer::instance();
     hbuf.get().clear();
@@ -60,5 +60,5 @@ TEST(processortests, historyprocessor4)
     auto hp = historyprocessor(testcmd, oss2);
     ASSERT_TRUE(hp.checkparms());
     hp.docommand();
-    ASSERT_STREQ(oss1.str().c_str(), oss2.str().c_str());
+    ASSERT_TRUE(oss1.str() == oss2.str());
 }
