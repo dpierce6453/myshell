@@ -8,18 +8,20 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 
 class cmdprocessor {
 public:
-    cmdprocessor(std::vector<std::string> &enteredcmd);
+    cmdprocessor(std::vector<std::string> &enteredcmd, std::ostream &outstream = std::cout);
 
     virtual ~cmdprocessor();
-    virtual bool checkparms() = 0;
-    virtual void docommand() = 0;
-
+    bool process();
 protected:
     std::vector<std::string> cmd;
+    std::ostream &os;
 private:
+    virtual bool checkparms() = 0;
+    virtual void docommand() = 0;
     cmdprocessor() = delete;
 };
 

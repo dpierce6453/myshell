@@ -4,8 +4,9 @@
 
 #include "historyprocessor.h"
 #include "historybuffer.h"
+#include "cmdprocessor.h"
 
-historyprocessor::historyprocessor(std::vector<std::string> &enteredcmd, std::ostream &outstream) : cmdprocessor(enteredcmd), os(outstream) {}
+historyprocessor::historyprocessor(std::vector<std::string> &enteredcmd, std::ostream &outstream) : cmdprocessor(enteredcmd, outstream) {}
 
 void historyprocessor::docommand() {
     int cmdnum = 0;

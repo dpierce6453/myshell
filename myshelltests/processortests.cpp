@@ -16,21 +16,22 @@ TEST(processortests, historyprocessor_checkparms_with_clear_parm)
 {
     std::vector<std::string> testcmd = {"history", "-c"};
     auto hp = historyprocessor(testcmd);
-    ASSERT_TRUE(hp.checkparms());
+    ASSERT_TRUE(hp.process());
 }
 
 TEST(processortests, historyprocessor_checkparms_with_no_parms)
 {
     std::vector<std::string> testcmd = {"history"};
     auto hp = historyprocessor(testcmd);
-    ASSERT_TRUE(hp.checkparms());
+    ASSERT_TRUE(hp.process());
 }
 
 TEST(processortests, historyprocessor_checkparms_with_bad_parm)
 {
+    std::ostringstream oss;
     std::vector<std::string> testcmd = {"history", "goobledy"};
-    auto hp = historyprocessor(testcmd);
-    ASSERT_FALSE(hp.checkparms());
+    auto hp = historyprocessor(testcmd, oss);
+    ASSERT_FALSE(hp.process());
 }
 
 static std::vector<mystring> historybufferstrings =
@@ -57,8 +58,7 @@ TEST(processortests, historyprocessor_process_print_history_cmd)
     // now have the processor print the buffer
     std::vector<std::string> testcmd = {"history"};
     auto hp = historyprocessor(testcmd, oss2);
-    ASSERT_TRUE(hp.checkparms());
-    hp.docommand();
+    ASSERT_TRUE(hp.process());
     ASSERT_TRUE(oss1.str() == oss2.str());
 }
 
@@ -71,16 +71,13 @@ TEST(processortests, historyprocessor_process_clear_history_cmd)
 
     std::vector<std::string> testcmd = {"history", "-c"};
     auto hp1 = historyprocessor(testcmd);
-    ASSERT_TRUE(hp1.checkparms());
-    hp1.docommand();
+    ASSERT_TRUE(hp1.process());
     ASSERT_TRUE(hbuf.get().size() == 0);
 
     // now the history buffer should be empty.  Try to print it.
     testcmd = {"history"};
     auto hp2 = historyprocessor(testcmd, oss3);
-    ASSERT_TRUE(hp2.checkparms());
-    hp2.docommand();
-    std::cout << oss3.str() << std::endl;
+    ASSERT_TRUE(hp2.process());
     ASSERT_TRUE(oss3.str().empty());
 
 }
