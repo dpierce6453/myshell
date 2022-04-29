@@ -17,10 +17,20 @@ bool cmdprocessor::process() {
 }
 
 cmdprocessor::cmdprocessor(std::vector<std::string> &enteredcmd, std::ostream &outstream) : cmd(enteredcmd), os(outstream) {
-
+    //std::cout << "cmdprocessor constructor" << std::endl;
 }
 
 cmdprocessor::~cmdprocessor() {
     //std::cout << "cmdprocessor destructor" << std::endl;
+}
+
+cmdprocessor::cmdprocessor(const cmdprocessor &cp) : os(cp.os) {
+    //std::cout << "cmdprocessor copy constructor" << std::endl;
+
+}
+
+cmdprocessor::cmdprocessor(const cmdprocessor &&cp) : os(cp.os){
+    //std::cout << "cmdprocessor move constructor" << std::endl;
+
 }
 

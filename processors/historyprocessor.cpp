@@ -3,7 +3,7 @@
 //
 
 #include "historyprocessor.h"
-#include "historybuffer.h"
+#include "../historybuffer.h"
 #include "cmdprocessor.h"
 
 historyprocessor::historyprocessor(std::vector<std::string> &enteredcmd, std::ostream &outstream) : cmdprocessor(enteredcmd, outstream) {}

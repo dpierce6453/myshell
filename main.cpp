@@ -6,8 +6,8 @@
 
 #include "mystring.h"
 #include "historybuffer.h"
-#include "cmdprocessor.h"
-#include "historyprocessor.h"
+#include "processors/cmdprocessor.h"
+#include "processors/processorfactory.h"
 
 std::unique_ptr<cmdprocessor> Makeproccessor(std::vector<std::string> &cmd);
 
@@ -16,36 +16,24 @@ int main() {
 
     mystring strCmd;
     historybuffer& hbuf = historybuffer::instance();
+    processorfactory pf;
 
-    while (strCmd != "byebye")
+    while (true)
     {
         std::cout << "# ";
         std::getline(std::cin, strCmd);
         auto cmd = strCmd.removeextraspaces().tokenize();
-        auto cp = Makeproccessor(cmd);
+        auto cp = pf.Makeproccessor(cmd);
         if (cp != nullptr)
         {
             if(cp->process())
                 hbuf.get().push_back(cmd);  //store the cmd in the history buffer
         }
-
-    }
-    return 0;
-}
-
-enum PROCESSORS {HISTORY};
-std::map<std::string, PROCESSORS> tableofprocessors = {{"history", HISTORY}};
-std::unique_ptr<cmdprocessor> Makeproccessor(std::vector<std::string> &cmd) {
-    std::unique_ptr<cmdprocessor> cp = nullptr;
-
-    auto proc = tableofprocessors.find(cmd[0]);
-    if(proc != tableofprocessors.end())
-    {
-        switch (proc->second) {
-            case HISTORY:
-                cp = std::unique_ptr<cmdprocessor>(new historyprocessor(cmd));
-                break;
+        else
+        {
+            std::cout << "Command is not recognized" << std::endl;
         }
     }
-    return cp;
 }
+
+

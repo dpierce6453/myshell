@@ -4,13 +4,25 @@
 
 #include "gtest/gtest.h"
 
-#include "historyprocessor.h"
+#include "processors/historyprocessor.h"
 #include "historybuffer.h"
 #include "mystring.h"
 #include "mystring.h"
+#include "processors/byebyeprocessor.h"
+#include "byebyeprocessor_test.h"
 
 
 void fillhistorybuffer(historybuffer &hbuf);
+
+static std::vector<mystring> historybufferstrings =
+        {"start program parm1 parm2",
+         "start chromium browser",
+         "history",
+         "history -c",
+         "background program parm1 parm2",
+         "start /usr/bin/xterm -bg green",
+         "replay 3",
+         "terminate 1234"};
 
 TEST(processortests, historyprocessor_checkparms_with_clear_parm)
 {
@@ -25,24 +37,32 @@ TEST(processortests, historyprocessor_checkparms_with_no_parms)
     auto hp = historyprocessor(testcmd);
     ASSERT_TRUE(hp.process());
 }
+TEST(processortests, byebyeprocessor_check)
+{
+    historybuffer& hbuf = historybuffer::instance();
+    hbuf.clear();
+    fillhistorybuffer(hbuf);
+
+    std::ostringstream oss1;
+    for(auto str : historybufferstrings)
+        oss1 << str << std::endl;
+
+    std::vector<std::string> testcmd = {"byebye"};
+    auto _ostream = std::make_shared<std::ostringstream>();
+    auto hp = byebyeprocessor_test(testcmd, _ostream);
+    ASSERT_TRUE(hp.process());
+    ASSERT_TRUE(oss1.str() == _ostream->str());
+}
 
 TEST(processortests, historyprocessor_checkparms_with_bad_parm)
 {
+
     std::ostringstream oss;
     std::vector<std::string> testcmd = {"history", "goobledy"};
     auto hp = historyprocessor(testcmd, oss);
     ASSERT_FALSE(hp.process());
 }
 
-static std::vector<mystring> historybufferstrings =
-        {"start program parm1 parm2",
-         "start chromium browser",
-         "history",
-         "history -c",
-         "background program parm1 parm2",
-         "start /usr/bin/xterm -bg green",
-         "replay 3",
-         "terminate 1234"};
 
 TEST(processortests, historyprocessor_process_print_history_cmd)
 {

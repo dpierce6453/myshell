@@ -16,6 +16,8 @@ public:
 
     virtual ~cmdprocessor();
     bool process();
+    cmdprocessor(const cmdprocessor& cp);
+    cmdprocessor(const cmdprocessor&& cp);
 protected:
     std::vector<std::string> cmd;
     std::ostream &os;
