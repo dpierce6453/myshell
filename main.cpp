@@ -1,8 +1,8 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 #include <memory>
-#include <map>
 
 #include "mystring.h"
 #include "historybuffer.h"
@@ -11,8 +11,12 @@
 
 std::unique_ptr<cmdprocessor> Makeproccessor(std::vector<std::string> &cmd);
 
+void readhistoryfile(void);
+
 int main() {
     std::cout << "Welcome to my shell" << std::endl;
+
+    readhistoryfile();
 
     mystring strCmd;
     historybuffer& hbuf = historybuffer::instance();
@@ -32,6 +36,21 @@ int main() {
         else
         {
             std::cout << "Command is not recognized" << std::endl;
+        }
+    }
+}
+
+void readhistoryfile(void) {
+    historybuffer& hbuf = historybuffer::instance();
+    auto inFile = std::make_unique<std::ifstream>("mysh.his");
+    if(inFile->is_open())
+    {
+        mystring str1;
+        while (!inFile->eof())
+        {
+            std::getline(*inFile, str1);
+            if(!str1.empty())
+                hbuf.get().push_back(str1.tokenize());
         }
     }
 }

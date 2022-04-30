@@ -7,12 +7,13 @@
 
 #include <map>
 #include <string>
+#include <memory>
 
 #include "cmdprocessor.h"
 
 class processorfactory {
 private:
-    const enum PROCESSORS {HISTORY, BYEBYE};
+    enum PROCESSORS {HISTORY, BYEBYE};
     const std::map<std::string, PROCESSORS> tableofprocessors = {{"history", HISTORY}, {"byebye", BYEBYE}};
 
 public:
