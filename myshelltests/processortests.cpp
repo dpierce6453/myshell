@@ -2,14 +2,15 @@
 // Created by Dan on 4/24/2022.
 //
 
+#include <processors/startprocessor.h>
 #include "gtest/gtest.h"
 
 #include "processors/historyprocessor.h"
 #include "historybuffer.h"
 #include "mystring.h"
-#include "mystring.h"
 #include "processors/byebyeprocessor.h"
 #include "byebyeprocessor_test.h"
+#include "startprocessor_test.h"
 
 
 void fillhistorybuffer(historybuffer &hbuf);
@@ -112,4 +113,10 @@ void fillhistorybuffer(historybuffer &hbuf)
     }
     ASSERT_TRUE(hbuf.get().size() == historybufferstrings.size());
 
+}
+TEST(processortests, startprocessor_create)
+{
+    std::vector<std::string> testcmd = {"start", "chromium-browser"};
+    startprocessor_test sp(testcmd);
+    ASSERT_TRUE(sp.process());
 }

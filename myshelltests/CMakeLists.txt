@@ -27,6 +27,9 @@ set(Headers
         ../processors/cmdprocessor.h
         ../processors/historyprocessor.h
         ../processors/byebyeprocessor.h
+        ../processors/startprocessor.h
+        startprocessor_test.h
+        byebyeprocessor_test.h
         )
 
 set(Sources
@@ -35,8 +38,13 @@ set(Sources
         ../processors/cmdprocessor.cpp
         ../processors/historyprocessor.cpp
         ../processors/byebyeprocessor.cpp
+        ../processors/startprocessor.cpp
+        startprocessor_test.cpp
         stringtests.cpp
-        buffertests.cpp processortests.cpp byebyeprocessor_test.cpp byebyeprocessor_test.h)
+        buffertests.cpp
+        processortests.cpp
+        byebyeprocessor_test.cpp
+        )
 
 add_executable(${This} ${Sources} ${Headers} )
 
