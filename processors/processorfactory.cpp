@@ -5,6 +5,7 @@
 #include "processorfactory.h"
 #include "historyprocessor.h"
 #include "byebyeprocessor.h"
+#include "startprocessor.h"
 
 std::unique_ptr<cmdprocessor> processorfactory::Makeproccessor(std::vector<std::string> &cmd) {
     std::unique_ptr<cmdprocessor> cp = nullptr;
@@ -18,6 +19,10 @@ std::unique_ptr<cmdprocessor> processorfactory::Makeproccessor(std::vector<std::
                 break;
             case BYEBYE:
                 cp = std::unique_ptr<cmdprocessor>(new byebyeprocessor(cmd, "mysh.his"));
+                break;
+            case START:
+                cp = std::unique_ptr<cmdprocessor>( new startprocessor(cmd));
+                break;
         }
     }
     return cp;

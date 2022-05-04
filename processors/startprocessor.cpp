@@ -20,6 +20,7 @@ void startprocessor::docommand() {
         //This is the parent process.  Need to wait here until child exits
         int status;
         waitpid(child_pid, &status, 0);
+        os << "Child exited with status = " << status << std::endl;
     }
     else if (child_pid == 0)
     {
@@ -37,16 +38,12 @@ void startprocessor::docommand() {
 
 bool startprocessor::checkparms() {
     //all that is required is to have more than one argument.
-    if (cmd.size() > 1)
-    {
-        return true;
+    bool ret = false;
+    if (cmd.size() > 1) {
+        ret = true;
     }
-    else
-    {
-        return false;
-    }
+    return ret;
 }
-
 pid_t startprocessor::myfork() {
     return fork();
 }

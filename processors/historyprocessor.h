@@ -12,12 +12,12 @@
 class historyprocessor : public cmdprocessor {
 public:
     historyprocessor(std::vector<std::string> &enteredcmd, std::ostream &outstream = std::cout);
-
 private:
     void docommand() final;
     bool checkparms() final;
     enum e_whatcmd {PRINT, CLEAR};
     enum e_whatcmd whatcmd;
+    int whichcmd;
 
 };
 

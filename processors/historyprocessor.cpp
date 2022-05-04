@@ -34,3 +34,4 @@ bool historyprocessor::checkparms() {
         ret = false;
     return ret;
 }
+

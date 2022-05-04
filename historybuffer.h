@@ -13,6 +13,7 @@ class historybuffer {
 
 public:
     using historyvector = std::vector<std::vector<std::string>>;
+    using historyvector_it = std::vector<std::vector<std::string>>::iterator;
     static historybuffer& instance() {
         static historybuffer inst;
         return inst;
@@ -20,9 +21,13 @@ public:
     historyvector &get() {return buffer;};
     std::vector<std::string>& untokenize();
     void clear();
+    bool setreplay(size_t _whichcmd);
+    historyvector_it getreplay( void );
 private:
     historyvector buffer;
     std::vector<std::string> cmds;   //untokenized commands
+    size_t whichcmd;
+    bool isreplay = false;
     // constructor and destructor private.  copying not allowed.
     historybuffer() = default;
     ~historybuffer() = default;

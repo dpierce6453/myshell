@@ -28,6 +28,7 @@ set(Headers
         ../processors/historyprocessor.h
         ../processors/byebyeprocessor.h
         ../processors/startprocessor.h
+        ../processors/replayprocessor.h
         startprocessor_test.h
         byebyeprocessor_test.h
         )
@@ -39,6 +40,7 @@ set(Sources
         ../processors/historyprocessor.cpp
         ../processors/byebyeprocessor.cpp
         ../processors/startprocessor.cpp
+        ../processors/replayprocessor.cpp
         startprocessor_test.cpp
         stringtests.cpp
         buffertests.cpp

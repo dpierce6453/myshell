@@ -3,6 +3,7 @@
 //
 
 #include <processors/startprocessor.h>
+#include <processors/replayprocessor.h>
 #include "gtest/gtest.h"
 
 #include "processors/historyprocessor.h"
@@ -102,6 +103,31 @@ TEST(processortests, historyprocessor_process_clear_history_cmd)
     ASSERT_TRUE(oss3.str().empty());
 
 }
+TEST(processortests, replayprocessor_checkbadaregument)
+{
+    historybuffer& hbuf = historybuffer::instance();
+    std::ostringstream oss;
+    std::string str = replayprocessor::badarg_str + '\n';
+    std::vector<std::string> testcmd = {"replay", "gooble"};
+    replayprocessor rp(testcmd, oss);
+    ASSERT_TRUE(rp.process());
+    ASSERT_TRUE(oss.str() == str);
+    ASSERT_TRUE(hbuf.getreplay() == hbuf.get().end());
+}
+
+TEST(processortests, replayprocessor_checkbadreplay)
+{
+    historybuffer& hbuf = historybuffer::instance();
+    fillhistorybuffer(hbuf);
+
+    std::ostringstream oss;
+    std::string str = replayprocessor::noreplay_str + '\n';
+    std::vector<std::string> testcmd = {"replay", "25"};
+    replayprocessor rp(testcmd, oss);
+    ASSERT_TRUE(rp.process());
+    ASSERT_TRUE(oss.str() == str);
+    ASSERT_TRUE(hbuf.getreplay() == hbuf.get().end());
+}
 
 void fillhistorybuffer(historybuffer &hbuf)
 {
@@ -120,3 +146,4 @@ TEST(processortests, startprocessor_create)
     startprocessor_test sp(testcmd);
     ASSERT_TRUE(sp.process());
 }
+

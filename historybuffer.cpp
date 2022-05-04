@@ -27,3 +27,22 @@ void historybuffer::clear() {
     buffer.swap(vec);
 }
 
+bool historybuffer::setreplay(size_t _whichcmd) {
+    if(buffer.size() > _whichcmd)
+    {
+        whichcmd = _whichcmd;
+        isreplay = true;
+    }
+    return isreplay;
+}
+
+historybuffer::historyvector_it historybuffer::getreplay(void) {
+    historyvector_it ret = buffer.end();
+    if(isreplay && (whichcmd < buffer.size()))
+    {
+        isreplay = false;
+        ret = buffer.begin()+whichcmd;
+    }
+    return ret;
+}
+
