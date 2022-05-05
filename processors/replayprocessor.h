@@ -13,6 +13,7 @@ public:
     inline static const std::string noreplay_str = "The History Buffer is not that large - could not perform command";
     inline static const std::string badarg_str = "The argument was not a number!";
     replayprocessor(std::vector<std::string> &enteredcmd, std::ostream &outstream = std::cout) : cmdprocessor(enteredcmd, outstream) {}
+    bool Iscommandsaved() override {return false;};
 
 private:
     void docommand() final;

@@ -12,13 +12,14 @@
 class startprocessor : public cmdprocessor {
 public:
 
-    startprocessor(std::vector<std::string> &enteredcmd, std::ostream &outstream = std::cout);
+    startprocessor(std::vector<std::string> &enteredcmd, std::ostream &outstream = std::cout): cmdprocessor(enteredcmd, outstream) {};
 
 private:
     void docommand() final;
     bool checkparms() final;
     virtual pid_t myfork();
     virtual int myexec(const char* path,  char* const arg[]);
+    virtual void towaitornot_thatisthequestion(pid_t child_pid);
 
 };
 

@@ -6,8 +6,6 @@
 #include "startprocessor.h"
 #include "../mystring.h"
 
-startprocessor::startprocessor(std::vector<std::string> &enteredcmd, std::ostream &outstream) : cmdprocessor(enteredcmd,
-                                                                                                             outstream) {}
 
 void startprocessor::docommand() {
     pid_t child_pid = myfork();
@@ -17,10 +15,8 @@ void startprocessor::docommand() {
     }
     else if (child_pid > 0)
     {
-        //This is the parent process.  Need to wait here until child exits
-        int status;
-        waitpid(child_pid, &status, 0);
-        os << "Child exited with status = " << status << std::endl;
+        //This is the parent process.
+        towaitornot_thatisthequestion(child_pid);
     }
     else if (child_pid == 0)
     {
@@ -50,4 +46,10 @@ pid_t startprocessor::myfork() {
 
 int startprocessor::myexec(const char *path,  char * const arg[]) {
     return execvp(path, arg);
+}
+
+void startprocessor::towaitornot_thatisthequestion(pid_t child_pid) {
+        int status;
+        waitpid(child_pid, &status, 0);
+        os << "Child exited with status = " << status << std::endl;
 }

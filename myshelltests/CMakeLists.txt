@@ -29,9 +29,10 @@ set(Headers
         ../processors/byebyeprocessor.h
         ../processors/startprocessor.h
         ../processors/replayprocessor.h
+        ../processors/backgroundprocessor.h
         startprocessor_test.h
         byebyeprocessor_test.h
-        )
+         )
 
 set(Sources
         ../mystring.cpp
@@ -41,12 +42,13 @@ set(Sources
         ../processors/byebyeprocessor.cpp
         ../processors/startprocessor.cpp
         ../processors/replayprocessor.cpp
+        ../processors/backgroundprocessor.cpp
         startprocessor_test.cpp
         stringtests.cpp
         buffertests.cpp
         processortests.cpp
         byebyeprocessor_test.cpp
-        )
+        ../pidvector.cpp ../pidvector.h backgroundprocessor_test.cpp backgroundprocessor_test.h)
 
 add_executable(${This} ${Sources} ${Headers} )
 

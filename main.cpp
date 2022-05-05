@@ -6,40 +6,28 @@
 
 #include "mystring.h"
 #include "historybuffer.h"
-#include "processors/cmdprocessor.h"
 #include "processors/processorfactory.h"
 
-std::unique_ptr<cmdprocessor> Makeproccessor(std::vector<std::string> &cmd);
 
-void readhistoryfile(void);
+static void readhistoryfile(void);
+static std::vector<std::string> getcmd();
 
 int main() {
     std::cout << "Welcome to my shell" << std::endl;
 
     readhistoryfile();
 
-    mystring strCmd;
     historybuffer& hbuf = historybuffer::instance();
     processorfactory pf;
 
     while (true)
     {
         std::cout << "# ";
-        std::vector<std::string> cmd;
-        // get the next command
-        auto it = hbuf.getreplay();
-        if(it != hbuf.get().end())
-        {
-            cmd = *it;
-        } else
-        {
-            std::getline(std::cin, strCmd);
-            cmd = strCmd.removeextraspaces().tokenize();
-        }
+        auto cmd = getcmd();
         auto cp = pf.Makeproccessor(cmd);
         if (cp != nullptr)
         {
-            if(cp->process())
+            if(cp->process() && cp->Iscommandsaved())
                 hbuf.get().push_back(cmd);  //store the cmd in the history buffer
         }
         else
@@ -47,6 +35,21 @@ int main() {
             std::cout << "Command is not recognized" << std::endl;
         }
     }
+}
+
+std::vector<std::string> getcmd() {
+    historybuffer& hbuf = historybuffer::instance();
+    mystring strCmd;
+    std::vector<std::string> cmd;
+
+    auto it = hbuf.getreplay();
+    if (it != hbuf.get().end()) {
+        cmd = *it;
+    } else {
+        std::getline(std::cin, strCmd);
+        cmd = strCmd.removeextraspaces().tokenize();
+    }
+    return cmd;
 }
 
 void readhistoryfile(void) {

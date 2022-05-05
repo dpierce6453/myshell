@@ -18,6 +18,7 @@ public:
     bool process();
     cmdprocessor(const cmdprocessor& cp);
     cmdprocessor(const cmdprocessor&& cp);
+    virtual bool Iscommandsaved() {return true;};
 protected:
     std::vector<std::string> cmd;
     std::ostream &os;

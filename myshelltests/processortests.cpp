@@ -4,6 +4,7 @@
 
 #include <processors/startprocessor.h>
 #include <processors/replayprocessor.h>
+#include <pidvector.h>
 #include "gtest/gtest.h"
 
 #include "processors/historyprocessor.h"
@@ -12,6 +13,7 @@
 #include "processors/byebyeprocessor.h"
 #include "byebyeprocessor_test.h"
 #include "startprocessor_test.h"
+#include "backgroundprocessor_test.h"
 
 
 void fillhistorybuffer(historybuffer &hbuf);
@@ -158,5 +160,16 @@ TEST(processortests, startprocessor_create)
     std::vector<std::string> testcmd = {"start", "chromium-browser"};
     startprocessor_test sp(testcmd);
     ASSERT_TRUE(sp.process());
+}
+
+TEST(processortests, backgroundprocessor_create)
+{
+    auto &pvec = pidvector::instance().get();
+    pvec.clear();
+    std::vector<std::string> testcmd = {"background", "chromium-browser"};
+    backgroundprocessor_test bp(testcmd);
+    ASSERT_TRUE(bp.process());
+    ASSERT_TRUE(pvec.size() == 1);
+    ASSERT_TRUE(pvec.begin()[0] == 1);
 }
 

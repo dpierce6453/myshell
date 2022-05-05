@@ -12,6 +12,8 @@
 class historyprocessor : public cmdprocessor {
 public:
     historyprocessor(std::vector<std::string> &enteredcmd, std::ostream &outstream = std::cout);
+    bool Iscommandsaved() override {return false;};
+
 private:
     void docommand() final;
     bool checkparms() final;
