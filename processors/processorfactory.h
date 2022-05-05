@@ -13,10 +13,11 @@
 
 class processorfactory {
 private:
-    enum PROCESSORS {HISTORY, BYEBYE, START};
+    enum PROCESSORS {HISTORY, BYEBYE, START, REPLAY};
     const std::map<std::string, PROCESSORS> tableofprocessors = {{"history", HISTORY},
                                                                  {"byebye", BYEBYE},
-                                                                 {"start", START}};
+                                                                 {"start", START},
+                                                                 {"replay", REPLAY}};
 
 public:
     std::unique_ptr<cmdprocessor> Makeproccessor(std::vector<std::string> &cmd);

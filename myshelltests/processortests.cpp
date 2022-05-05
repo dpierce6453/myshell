@@ -128,6 +128,19 @@ TEST(processortests, replayprocessor_checkbadreplay)
     ASSERT_TRUE(oss.str() == str);
     ASSERT_TRUE(hbuf.getreplay() == hbuf.get().end());
 }
+TEST(processortests, replayprocessor_checkgoodreplay)
+{
+    historybuffer& hbuf = historybuffer::instance();
+    fillhistorybuffer(hbuf);
+
+    std::ostringstream oss;
+    std::vector<std::string> testcmd = {"replay", "3"};
+    replayprocessor rp(testcmd);
+    ASSERT_TRUE(rp.process());
+    ASSERT_TRUE(hbuf.getreplay() == hbuf.get().begin()+3);
+    ASSERT_TRUE(hbuf.getreplay() == hbuf.get().end());
+
+}
 
 void fillhistorybuffer(historybuffer &hbuf)
 {

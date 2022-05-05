@@ -25,8 +25,17 @@ int main() {
     while (true)
     {
         std::cout << "# ";
-        std::getline(std::cin, strCmd);
-        auto cmd = strCmd.removeextraspaces().tokenize();
+        std::vector<std::string> cmd;
+        // get the next command
+        auto it = hbuf.getreplay();
+        if(it != hbuf.get().end())
+        {
+            cmd = *it;
+        } else
+        {
+            std::getline(std::cin, strCmd);
+            cmd = strCmd.removeextraspaces().tokenize();
+        }
         auto cp = pf.Makeproccessor(cmd);
         if (cp != nullptr)
         {

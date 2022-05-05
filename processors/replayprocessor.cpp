@@ -2,7 +2,7 @@
 // Created by harldanp on 5/4/2022.
 //
 
-#include <historybuffer.h>
+#include "../historybuffer.h"
 #include "replayprocessor.h"
 
 void replayprocessor::docommand() {
@@ -20,6 +20,9 @@ void replayprocessor::docommand() {
     if(hbuf.get().size() < whichcmd)
     {
         os << noreplay_str << std::endl;
+    } else
+    {
+        hbuf.setreplay(whichcmd);
     }
 }
 
