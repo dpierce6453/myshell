@@ -48,7 +48,7 @@ set(Sources
         buffertests.cpp
         processortests.cpp
         byebyeprocessor_test.cpp
-        ../pidvector.cpp ../pidvector.h backgroundprocessor_test.cpp backgroundprocessor_test.h)
+        ../pidvector.cpp ../pidvector.h backgroundprocessor_test.cpp backgroundprocessor_test.h ../processors/terminateprocessor.cpp ../processors/terminateprocessor.h)
 
 add_executable(${This} ${Sources} ${Headers} )
 

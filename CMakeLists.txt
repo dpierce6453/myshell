@@ -18,7 +18,7 @@ add_executable(myshell
         processors/byebyeprocessor.cpp
         processors/byebyeprocessor.h
         processors/startprocessor.cpp
-        processors/startprocessor.h processors/replayprocessor.cpp processors/replayprocessor.h processors/backgroundprocessor.cpp processors/backgroundprocessor.h pidvector.cpp pidvector.h)
+        processors/startprocessor.h processors/replayprocessor.cpp processors/replayprocessor.h processors/backgroundprocessor.cpp processors/backgroundprocessor.h pidvector.cpp pidvector.h processors/terminateprocessor.cpp processors/terminateprocessor.h)
 
 enable_testing()
 add_subdirectory(myshelltests)

@@ -11,18 +11,17 @@ void replayprocessor::docommand() {
     int whichcmd;
     try {
         whichcmd = stoi(cmd[1]);
+        if(hbuf.get().size() < whichcmd)
+        {
+            os << noreplay_str << std::endl;
+        } else
+        {
+            hbuf.setreplay(whichcmd);
+        }
     }
     catch (std::invalid_argument& e)
     {
         os << badarg_str << std::endl;
-        return;
-    }
-    if(hbuf.get().size() < whichcmd)
-    {
-        os << noreplay_str << std::endl;
-    } else
-    {
-        hbuf.setreplay(whichcmd);
     }
 }
 

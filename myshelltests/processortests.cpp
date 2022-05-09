@@ -2,15 +2,18 @@
 // Created by Dan on 4/24/2022.
 //
 
-#include <processors/startprocessor.h>
-#include <processors/replayprocessor.h>
-#include <pidvector.h>
 #include "gtest/gtest.h"
 
+#include "processors/startprocessor.h"
+#include "processors/replayprocessor.h"
 #include "processors/historyprocessor.h"
-#include "historybuffer.h"
-#include "mystring.h"
 #include "processors/byebyeprocessor.h"
+#include "processors/terminateprocessor.h"
+
+#include "historybuffer.h"
+#include "pidvector.h"
+#include "mystring.h"
+
 #include "byebyeprocessor_test.h"
 #include "startprocessor_test.h"
 #include "backgroundprocessor_test.h"
@@ -171,5 +174,15 @@ TEST(processortests, backgroundprocessor_create)
     ASSERT_TRUE(bp.process());
     ASSERT_TRUE(pvec.size() == 1);
     ASSERT_TRUE(pvec.begin()[0] == 1);
+}
+
+TEST(processortests, terminatorprocessor_create)
+{
+    auto &pvec = pidvector::instance().get();
+    pvec.clear();
+    pvec.push_back(123);
+    std::vector<std::string> testcmd = {"terminate", "123"};
+    terminateprocessor tp(testcmd);
+    ASSERT_TRUE(tp.process());
 }
 
