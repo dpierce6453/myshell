@@ -13,6 +13,7 @@ public:
     backgroundprocessor(std::vector<std::string> &enteredcmd, std::ostream &outstream = std::cout) : startprocessor(enteredcmd, outstream) {}
 private:
     virtual void towaitornot_thatisthequestion(pid_t child_pid);
+    virtual void myexec(const char* path,  char* const arg[]);
 
 
 };

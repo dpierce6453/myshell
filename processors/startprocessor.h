@@ -18,7 +18,7 @@ private:
     void docommand() final;
     bool checkparms() final;
     virtual pid_t myfork();
-    virtual int myexec(const char* path,  char* const arg[]);
+    virtual void myexec(const char* path,  char* const arg[]);
     virtual void towaitornot_thatisthequestion(pid_t child_pid);
 
 };

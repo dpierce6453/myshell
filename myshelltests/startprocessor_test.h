@@ -13,7 +13,7 @@ public:
     startprocessor_test(std::vector<std::string> &enteredcmd, std::ostream &outstream = std::cout);
 private:
     virtual pid_t myfork() final;
-    virtual int myexec(const char* path, char* const arg[]) final;
+    virtual void myexec(const char* path, char* const arg[]) final;
 
 };
 

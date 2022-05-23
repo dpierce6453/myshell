@@ -7,6 +7,7 @@
 #include "byebyeprocessor.h"
 #include "startprocessor.h"
 #include "replayprocessor.h"
+#include "backgroundprocessor.h"
 
 std::unique_ptr<cmdprocessor> processorfactory::Makeproccessor(std::vector<std::string> &cmd) {
     std::unique_ptr<cmdprocessor> cp = nullptr;
@@ -26,6 +27,9 @@ std::unique_ptr<cmdprocessor> processorfactory::Makeproccessor(std::vector<std::
                 break;
             case REPLAY:
                 cp = std::unique_ptr<cmdprocessor>( new replayprocessor(cmd));
+                break;
+            case BACKGROUND:
+                cp = std::unique_ptr<cmdprocessor>(new backgroundprocessor( cmd) );
                 break;
         }
     }

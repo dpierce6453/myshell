@@ -8,7 +8,7 @@ pid_t startprocessor_test::myfork() {
     return 0;
 }
 
-int startprocessor_test::myexec(const char *path, char* const arg[]) {
+void startprocessor_test::myexec(const char *path, char* const arg[]) {
     os << "myexec was called" << std::endl;
     os << "path = " << path << std::endl;
     int index=0;
@@ -17,7 +17,7 @@ int startprocessor_test::myexec(const char *path, char* const arg[]) {
         os << "arg " << index << " " << arg[index] << std::endl;
         index++;
     }
-    return 0;
+    //return 0;
 }
 
 startprocessor_test::startprocessor_test(std::vector<std::string> &enteredcmd, std::ostream &outstream) : startprocessor(

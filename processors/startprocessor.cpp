@@ -44,8 +44,9 @@ pid_t startprocessor::myfork() {
     return fork();
 }
 
-int startprocessor::myexec(const char *path,  char * const arg[]) {
-    return execvp(path, arg);
+void startprocessor::myexec(const char *path,  char * const arg[]) {
+    execvp(path, arg);
+    exit(1);
 }
 
 void startprocessor::towaitornot_thatisthequestion(pid_t child_pid) {

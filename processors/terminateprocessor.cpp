@@ -3,7 +3,7 @@
 //
 
 #include "terminateprocessor.h"
-#include "pidvector.h"
+#include "../pidvector.h"
 
 void terminateprocessor::docommand() {
     auto &pvec = pidvector::instance();
