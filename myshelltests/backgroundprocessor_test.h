@@ -14,7 +14,7 @@ public:
         : backgroundprocessor(enteredcmd, outstream) {};
 private:
     virtual pid_t myfork() final;
-    virtual int myexec(const char* path, char* const arg[]) final;
+    virtual void myexec(const char* path, char* const arg[]) final;
 };
 
 

@@ -8,7 +8,7 @@ pid_t backgroundprocessor_test::myfork() {
     return 1;
 }
 
-int backgroundprocessor_test::myexec(const char *path, char* const arg[]) {
+void backgroundprocessor_test::myexec(const char *path, char* const arg[]) {
     os << "myexec was called" << std::endl;
     os << "path = " << path << std::endl;
     int index=0;
@@ -17,5 +17,5 @@ int backgroundprocessor_test::myexec(const char *path, char* const arg[]) {
         os << "arg " << index << " " << arg[index] << std::endl;
         index++;
     }
-    return 0;
+    //return 0;
 }

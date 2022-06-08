@@ -23,6 +23,7 @@ CPMAddPackage(
 
 set(Headers
         ../mystring.h
+        ../pidvector.h
         ../historybuffer.h
         ../processors/cmdprocessor.h
         ../processors/historyprocessor.h
@@ -30,25 +31,32 @@ set(Headers
         ../processors/startprocessor.h
         ../processors/replayprocessor.h
         ../processors/backgroundprocessor.h
+        ../processors/terminateprocessor.h
         startprocessor_test.h
         byebyeprocessor_test.h
+        backgroundprocessor_test.h
+        terminateprocessor_test.h
          )
 
 set(Sources
         ../mystring.cpp
         ../historybuffer.cpp
+        ../pidvector.cpp
         ../processors/cmdprocessor.cpp
         ../processors/historyprocessor.cpp
         ../processors/byebyeprocessor.cpp
         ../processors/startprocessor.cpp
         ../processors/replayprocessor.cpp
         ../processors/backgroundprocessor.cpp
+        ../processors/terminateprocessor.cpp
         startprocessor_test.cpp
         stringtests.cpp
         buffertests.cpp
         processortests.cpp
         byebyeprocessor_test.cpp
-        ../pidvector.cpp ../pidvector.h backgroundprocessor_test.cpp backgroundprocessor_test.h ../processors/terminateprocessor.cpp ../processors/terminateprocessor.h)
+        backgroundprocessor_test.cpp
+        terminateprocessor_test.cpp
+        )
 
 add_executable(${This} ${Sources} ${Headers} )
 
