@@ -2,23 +2,20 @@
 // Created by Dan on 4/24/2022.
 //
 
-#include "gtest/gtest.h"
-#include "gmock/gmock.h"
 
-#include "processors/startprocessor.h"
+#include "gtest/gtest.h"
+
 #include "processors/replayprocessor.h"
 #include "processors/historyprocessor.h"
 #include "processors/byebyeprocessor.h"
-#include "processors/terminateprocessor.h"
 
 #include "historybuffer.h"
 #include "pidvector.h"
 #include "mystring.h"
 
-#include "byebyeprocessor_test.h"
-#include "startprocessor_test.h"
-#include "backgroundprocessor_test.h"
-#include "terminateprocessor_test.h"
+#include "testclasses/byebyeprocessor_test.h"
+#include "testclasses/startprocessor_test.h"
+#include "testclasses/backgroundprocessor_test.h"
 
 
 void fillhistorybuffer(historybuffer &hbuf);
@@ -179,64 +176,3 @@ TEST(processortests, backgroundprocessor_create)
     ASSERT_TRUE(pvec.begin()[0] == 1);
 }
 
-TEST(processortests, terminatorprocessor_badpid)
-{
-    auto &pvec = pidvector::instance().get();
-    std::ostringstream oss;
-    pvec.clear();
-    pid_t pid = 123;
-    pvec.push_back(pid);
-    std::string str = terminateprocessor::badpid_str + '\n';
-    std::vector<std::string> testcmd = {"terminate", "321"};
-
-    terminateprocessor tp(testcmd, oss);
-    ASSERT_THAT(tp.process(), true);
-    ASSERT_THAT(oss.str(), ::testing::StrEq(str));
-}
-TEST(processortests, terminateprocessor_notapid)
-{
-    auto &pvec = pidvector::instance().get();
-    std::ostringstream oss;
-    pvec.clear();
-    pid_t pid = 123;
-    pvec.push_back(pid);
-    std::string str = terminateprocessor::badarg_str + '\n';
-    std::vector<std::string> testcmd = {"terminate", "gooble"};
-
-    terminateprocessor tp(testcmd, oss);
-    ASSERT_TRUE(tp.process());
-    ASSERT_THAT(oss.str(), ::testing::StrEq(str));
-}
-TEST(processortests, terminateprocessor_goodpidbutprocessnotrunning)
-{
-    auto &pvec = pidvector::instance().get();
-    std::ostringstream oss;
-    pvec.clear();
-    pid_t pid = 123;
-    pvec.push_back(pid);
-    std::string str = terminateprocessor::noprocess_str + std::to_string(pid) + '\n';
-    std::vector<std::string> testcmd = {"terminate", std::to_string(pid)};
-
-    terminateprocessor tp(testcmd, oss);
-    ASSERT_TRUE(tp.process());
-    ASSERT_THAT(oss.str(), ::testing::StrEq(str));
-    auto item = std::find(pvec.begin(), pvec.end(), pid);
-    ASSERT_THAT(item, testing::Eq(pvec.end()));
-}
-
-TEST(processortests, terminateprocessor_goodpid)
-{
-    auto &pvec = pidvector::instance().get();
-    std::ostringstream oss;
-    pvec.clear();
-    pid_t pid = 123;
-    pvec.push_back(pid);
-    std::string str = terminateprocessor::goodpid_str + std::to_string(pid) + '\n';
-    std::vector<std::string> testcmd = {"terminate", std::to_string(pid)};
-
-    terminateprocessor_test tp(testcmd, oss);
-    ASSERT_TRUE(tp.process());
-    ASSERT_THAT(oss.str(), ::testing::StrEq(str));
-    auto item = std::find(pvec.begin(), pvec.end(), pid);
-    ASSERT_THAT(item, testing::Eq(pvec.end()));
-}

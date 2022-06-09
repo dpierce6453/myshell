@@ -30,7 +30,7 @@ void terminateprocessor::docommand() {
             int ret = dokill(whichpid);
             if (ret == -1)
             {
-                switch (errno)
+                switch (geterrno())
                 {
                     case ESRCH:
                         os << noprocess_str << whichpid << std::endl;
@@ -66,6 +66,10 @@ bool terminateprocessor::checkparms() {
 
 int terminateprocessor::dokill(pid_t pid) {
     return kill(pid, SIGKILL);
+}
+
+int terminateprocessor::geterrno(void) {
+    return errno;
 }
 
 

@@ -32,10 +32,10 @@ set(Headers
         ../processors/replayprocessor.h
         ../processors/backgroundprocessor.h
         ../processors/terminateprocessor.h
-        startprocessor_test.h
-        byebyeprocessor_test.h
-        backgroundprocessor_test.h
-        terminateprocessor_test.h
+        testclasses/startprocessor_test.h
+        testclasses/byebyeprocessor_test.h
+        testclasses/backgroundprocessor_test.h
+        testclasses/terminateprocessor_test.h
          )
 
 set(Sources
@@ -49,14 +49,14 @@ set(Sources
         ../processors/replayprocessor.cpp
         ../processors/backgroundprocessor.cpp
         ../processors/terminateprocessor.cpp
-        startprocessor_test.cpp
+        testclasses/startprocessor_test.cpp
         stringtests.cpp
         buffertests.cpp
         processortests.cpp
-        byebyeprocessor_test.cpp
-        backgroundprocessor_test.cpp
-        terminateprocessor_test.cpp
-        )
+        testclasses/byebyeprocessor_test.cpp
+        testclasses/backgroundprocessor_test.cpp
+        testclasses/terminateprocessor_test.cpp
+        terminateprocessortests.cpp)
 
 add_executable(${This} ${Sources} ${Headers} )
 

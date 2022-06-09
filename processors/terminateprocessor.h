@@ -19,6 +19,7 @@ private:
     void docommand() final;
     bool checkparms() final;
     virtual int dokill(pid_t pid);
+    virtual int geterrno( void );
 
 };
 
