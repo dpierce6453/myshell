@@ -56,7 +56,8 @@ set(Sources
         testclasses/byebyeprocessor_test.cpp
         testclasses/backgroundprocessor_test.cpp
         testclasses/terminateprocessor_test.cpp
-        terminateprocessortests.cpp)
+        terminateprocessortests.cpp
+        startprocessortests.cpp)
 
 add_executable(${This} ${Sources} ${Headers} )
 

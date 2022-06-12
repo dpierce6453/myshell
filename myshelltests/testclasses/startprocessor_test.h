@@ -12,8 +12,13 @@ class startprocessor_test : public startprocessor {
 public:
     startprocessor_test(std::vector<std::string> &enteredcmd, std::ostream &outstream = std::cout);
 private:
-    virtual pid_t myfork() final;
-    virtual void myexec(const char* path, char* const arg[]) final;
+    virtual pid_t myfork() override final;
+    virtual void myexec(const char* path, char* const arg[]) override final;
+    virtual void towaitornot_thatisthequestion(pid_t child_pid) override final;
+
+    pid_t myforkret = 0;
+public:
+    void setMyforkret(pid_t myforkret);
 
 };
 

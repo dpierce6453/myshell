@@ -144,7 +144,6 @@ TEST(processortests, replayprocessor_checkgoodreplay)
     ASSERT_TRUE(rp.process());
     ASSERT_TRUE(hbuf.getreplay() == hbuf.get().begin()+3);
     ASSERT_TRUE(hbuf.getreplay() == hbuf.get().end());
-
 }
 
 void fillhistorybuffer(historybuffer &hbuf)
@@ -158,12 +157,7 @@ void fillhistorybuffer(historybuffer &hbuf)
     ASSERT_TRUE(hbuf.get().size() == historybufferstrings.size());
 
 }
-TEST(processortests, startprocessor_create)
-{
-    std::vector<std::string> testcmd = {"start", "chromium-browser"};
-    startprocessor_test sp(testcmd);
-    ASSERT_TRUE(sp.process());
-}
+
 
 TEST(processortests, backgroundprocessor_create)
 {

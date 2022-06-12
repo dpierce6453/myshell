@@ -17,5 +17,4 @@ void backgroundprocessor_test::myexec(const char *path, char* const arg[]) {
         os << "arg " << index << " " << arg[index] << std::endl;
         index++;
     }
-    //return 0;
 }

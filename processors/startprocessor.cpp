@@ -11,7 +11,7 @@ void startprocessor::docommand() {
     pid_t child_pid = myfork();
     if(child_pid == -1)
     {
-        os << "Fork failed for some reason" << std::endl;
+        os << forkfail_str << std::endl;
     }
     else if (child_pid > 0)
     {
@@ -52,5 +52,5 @@ void startprocessor::myexec(const char *path,  char * const arg[]) {
 void startprocessor::towaitornot_thatisthequestion(pid_t child_pid) {
         int status;
         waitpid(child_pid, &status, 0);
-        os << "Child exited with status = " << status << std::endl;
+        os << waitchildproc_str << status << std::endl;
 }
